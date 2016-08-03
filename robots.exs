@@ -57,7 +57,6 @@ defmodule Robots do
   defp move({cur, [h|t]}) when cur > h do
     {cur-1, [h|t]}
   end
-
 end
 
 # Parses the input file and formats the output file.
