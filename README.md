@@ -19,34 +19,34 @@ later steps. This is normally done with recursive functions.
 
 Here's an example of how lists work in a non-recursive example in iex:
 
-iex(1)> a = [1,2,3]
-[1, 2, 3]
-iex(2)> [head|tail] = a
-[1, 2, 3]
-iex(3)> head
-1
-iex(4)> tail
-[2, 3]
-iex(5)> [head|tail] = tail
-[2, 3]
-iex(6)> head
-2
-iex(7)> tail
-[3]
-iex(8)> a = [1,2,3]
-[1, 2, 3]
-iex(9)> [head|tail] = a
-[1, 2, 3]
-iex(10)> head
-1
-iex(11)> tail
-[2, 3]
-iex(12)> [head2|tail2] = tail
-[2, 3]
-iex(13)> head2
-2
-iex(14)> tail2
-[3]
+    iex(1)> a = [1,2,3]
+    [1, 2, 3]
+    iex(2)> [head|tail] = a
+    [1, 2, 3]
+    iex(3)> head
+    1
+    iex(4)> tail
+    [2, 3]
+    iex(5)> [head|tail] = tail
+    [2, 3]
+    iex(6)> head
+    2
+    iex(7)> tail
+    [3]
+    iex(8)> a = [1,2,3]
+    [1, 2, 3]
+    iex(9)> [head|tail] = a
+    [1, 2, 3]
+    iex(10)> head
+    1
+    iex(11)> tail
+    [2, 3]
+    iex(12)> [head2|tail2] = tail
+    [2, 3]
+    iex(13)> head2
+    2
+    iex(14)> tail2
+    [3]
 
 Another unusual but useful feature is the |> operator. It passes the value on
 the left of the operator to the function on the right with the value as the
@@ -55,8 +55,8 @@ first argument to the function.
 This example does string parsing succesively by chaining functions together.
 Definitely cleaner than nesting functions in parentheses:
 
-iex(20)> "camel case" |> String.split |> Enum.map(&String.capitalize &1) |> Enum.join
-"CamelCase"
+    iex(20)> "camel case" |> String.split |> Enum.map(&String.capitalize &1) |> Enum.join
+    "CamelCase"
 
 
 How To Run
