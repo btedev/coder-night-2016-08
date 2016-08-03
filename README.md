@@ -11,11 +11,11 @@ often use in Ruby.
 
 This passes the Code Jam test for both the small and large inputs.
 
-One of the most unusual features you will encounter when reading this code is
-the use of lists with head and tail. Instead of arrays that you iterate over
+One of the features of this code that may not be familiar is
+the use of lists with a head and tail. Instead of arrays that you iterate over
 like most languages, Elixir (and Erlang on which it's based) uses lists where
-you do something with the head then do something with the rest (the tail) in
-later steps. This is normally done with recursive functions.
+you do something with the head item then do something with the rest of the items
+(the tail) in later steps. This is normally done with recursive functions.
 
 Here's an example of how lists work in a non-recursive example in iex:
 
