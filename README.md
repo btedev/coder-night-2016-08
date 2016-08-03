@@ -19,20 +19,6 @@ later steps. This is normally done with recursive functions.
 
 Here's an example of how lists work in a non-recursive example in iex:
 
-    iex(1)> a = [1,2,3]
-    [1, 2, 3]
-    iex(2)> [head|tail] = a
-    [1, 2, 3]
-    iex(3)> head
-    1
-    iex(4)> tail
-    [2, 3]
-    iex(5)> [head|tail] = tail
-    [2, 3]
-    iex(6)> head
-    2
-    iex(7)> tail
-    [3]
     iex(8)> a = [1,2,3]
     [1, 2, 3]
     iex(9)> [head|tail] = a
