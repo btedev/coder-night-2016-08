@@ -43,7 +43,7 @@ defmodule Robots do
   end
 
   # Matches when the robot has more moves to make in the future
-  # but doesn't need to move now (e.g. it's about to push a button).
+  # but doesn't need to move now (i.e. it's about to push a button).
   defp move({cur, [cur|t]}) do
     {cur, [cur|t]}
   end

@@ -65,6 +65,6 @@ How To Run
 just exec `brew update; brew install elixir`
 
 To keep it simple I didn't use mix so to run it, open the Elixir REPL via `iex`
-then compile via `c robots.exs` then have it process a file like this:
+then compile via `c "robots.exs"` then have it process a file like this:
 
 `RobotsIO.process("A-small-practice.in", "A-small-practice.out")`
