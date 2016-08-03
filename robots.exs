@@ -1,45 +1,66 @@
-# Defines the robot movement logic
+# Defines the robot movement logic.
 defmodule Robots do
 
+  # Convenience function so calling code doesn't need to pass in 0 seconds.
   def tick(buttons, orange, blue) do
     tick(buttons, orange, blue, 0)
   end
 
+  # Matches when the instruction set to be processed is empty
+  # because the robots have completed their mission.
+  # Returns the total number of seconds the process took.
   defp tick([], _orange, _blue, seconds) do
     seconds
   end
 
+  # Matches when the next button to be pushed is orange AND
+  # the orange robot is in the correct position (because the button_num
+  # value must be identical in all 3 "button_num" arguments).
+  # An example of what the arguments could look like when this matches:
+  # ([{"O", 4}|{"B", 55},{"O",10}], {4, [4|10]}, {50, [55]}, 19)
+  # Note that the organge and blue robot data structures are of the form
+  # { current_position, [target_button_position|future_buttons] }
   defp tick([{"O", button_num}|buttons_tail], {button_num, [button_num|orange_tail]}, blue, seconds) do
     tick(buttons_tail, {button_num, orange_tail}, move(blue), seconds+1)
   end
 
+  # Same as above for the Blue robot.
+  # I could probably refine the program by making these two methods more generic.
   defp tick([{"B", button_num}|buttons_tail], orange, {button_num, [button_num|blue_tail]}, seconds) do
     tick(buttons_tail, move(orange), {button_num, blue_tail}, seconds+1)
   end
 
+  # Matches when neither robot is in position to push a button. Note that both
+  # robots move in this case but in the above two methods, only one of
+  # the robots moves.
   defp tick(buttons, orange, blue, seconds) do
     tick(buttons, move(orange), move(blue), seconds+1)
   end
 
+  # Matches when the robot has no more moves to make.
   defp move({cur, []}) do
     {cur, []}
   end
 
+  # Matches when the robot has more moves to make in the future
+  # but doesn't need to move now (e.g. it's about to push a button).
   defp move({cur, [cur|t]}) do
     {cur, [cur|t]}
   end
 
+  # Matches when it needs to move up.
   defp move({cur, [h|t]}) when cur < h do
     {cur+1, [h|t]}
   end
 
+  # Matches when it needs to move down.
   defp move({cur, [h|t]}) when cur > h do
     {cur-1, [h|t]}
   end
 
 end
 
-# Parses the input file and formats the output file
+# Parses the input file and formats the output file.
 defmodule RobotsIO do
 
   # Usage:
@@ -51,7 +72,7 @@ defmodule RobotsIO do
     results = process_file(input_file, [])  # for each line, create a "case" as a list of instructions like [{"0", 1}, {"B", 4}...]
       |> Enum.map(&run_case &1)             # run each case through Robots module
       |> Enum.reverse                       # reverse because the first cases are at the tail of the list
-      |> Stream.with_index(1)               # use Stream to index the results (although at this point they are backward, like [{220, 1}, {194, 2}...])
+      |> Stream.with_index(1)               # order the results starting at 1 (although at this point they are backward, like [{220, 1}, {194, 2}...])
       |> Enum.map(fn { seconds, idx } -> [idx, seconds] end) # flip the results and format as lists like [[1, 220], [2, 194]...]
 
     # Write out results in the specified format
@@ -69,6 +90,7 @@ defmodule RobotsIO do
     end
   end
 
+  # Creates a "case" from an input line
   def process_line(line) do
     String.split(line)  # split line on spaces (the default for split)
     |> Enum.drop(1)     # drop the first number which describes the total # of buttons that need to be pressed
